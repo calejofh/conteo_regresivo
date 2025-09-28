@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cuenta regresiva para el regreso de Changuito ❤️🐒</title>
+  <meta name="description" content="Cuenta regresiva para el regreso de Changuito ❤️🐒" />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121b2c;
+      --card-2:#0f1827;
+      --text:#eaf2ff;
+      --muted:#8ea2c2;
+      --ring:rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 50% -10%, #182640 0%, var(--bg) 60%);
+      color:var(--text);
+      min-height:100dvh;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+    .card{
+      width: min(960px, 95vw);
+      background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow:
+        0 1px 0 var(--ring) inset,
+        0 10px 30px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    h1{
+      margin:0 0 6px 0;
+      font-weight:800;
+      font-size:clamp(1.4rem, 2.4vw + 1rem, 2.4rem);
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .date-line{
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-weight:500;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:16px;
+    }
+    .box{
+      background:#0c1424;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;
+      padding:20px 16px;
+      text-align:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.25) inset;
+    }
+    .num{
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height:1;
+      margin: 4px 0 6px;
+      text-shadow: 0 4px 20px rgba(0,0,0,.45);
+    }
+    .label{
+      font-size:.78rem;
+      letter-spacing:.16em;
+      color: var(--muted);
+    }
+    .done{
+      margin-top:14px;
+      font-weight:700;
+      color:#9dd6ff;
+      display:none;
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns: repeat(2, 1fr);}
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Cuenta regresiva para el regreso de Changuito ❤️🐒</h1>
+    <p id="dateLine" class="date-line"></p>
+
+   
