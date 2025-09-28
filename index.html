@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cuenta regresiva</title>
+  <style>
+    :root { color-scheme: dark; }
+    body{font-family:system-ui,Segoe UI,Arial,sans-serif;background:#0f172a;color:#fff;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:16px}
+    .card{background:#1e293b;padding:28px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:860px;width:100%}
+    h1{font-weight:800;line-height:1.2;margin:0 0 18px;font-size:clamp(22px,3.6vw,36px)}
+    .timer{display:flex;gap:12px;flex-wrap:wrap}
+    .box{background:#0b1324;border-radius:14px;padding:18px 22px;flex:1 1 150px;text-align:center}
+    .num{font-size:42px;font-weight:800;min-height:1em}
+    .label{font-size:12px;letter-spacing:.15em;color:#94a3b8;margin-top:6px}
+    .status{margin-top:12px;font-size:12px;color:#94a3b8}
+    .error{color:#ff6b6b}
+    noscript{color:#ffb020}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Cuenta regresiva para el regreso de Changuito ❤️🐒</h1>
+
+    <noscript>Activa JavaScript para ver el conteo.</noscript>
+
+    <div class="timer" id="timer">
+      <div class="box"><div id="days" class="num">—</div><div class="label">DÍAS</div></div>
+      <div class="box"><div id="hours" class="num">—</div><div class="label">HORAS</div></div>
+      <div class="box"><div id="minutes" class="num">—</div><div class="label">MINUTOS</div></div>
+      <div class="box"><div id="seconds" class="num">—</div><div class="label">SEGUNDOS</div></div>
+    </div>
+
+    <div id="status" class="status">Inicializando…</div>
+  </div>
+
+  <script>
+  (function(){
+    const statusEl = document.getElementById('status');
+    function setStatus(msg, isError=false){
+      statusEl.textContent = msg;
+      statusEl.className = 'status' + (isError ? ' error' : '');
+    }
+
+    try {
+      // Verificación básica de elementos
+      const ids = ['days','hours','minutes','seconds','timer'];
+      for (const id of ids) {
+        if (!document.getElementById(id)) throw new Error(`No se encontró el elemento #${id}`);
+      }
+
+      // Objetivo: 23 dic 2025 00:00 en Ecuador (UTC-5) -> 05:00:00Z
+      const targetUTC = Date.UTC(2025, 11, 23, 5, 0, 0);
+      if (Number.isNaN(targetUTC)) throw new Error('Fecha objetivo inválida');
+
+      // Mostrar meta y hora local para diagnóstico
+      const localNow = new Date();
+      setStatus(`OK · Ahora (tu navegador): ${localNow.toString()} · Meta UTC: ${new Date(targetUTC).toISOString()}`);
+
+      const $ = id => document.getElementById(id);
+
+      function tick() {
+        const now = Date.now();
+        const distance = targetUTC - now;
+
+        if (distance <= 0) {
+          $('days').textContent = 0;
+          $('hours').textContent = 0;
+          $('minutes').textContent = 0;
+          $('seconds').textContent = 0;
+          setStatus('¡Llegó Changuito! ❤️🐒');
+          return;
+        }
+
+        const d = Math.floor(distance / 86400000);
+        const h = Math.floor((distance % 86400000) / 3600000);
+        const m = Math.floor((distance % 3600000) / 60000);
+        const s = Math.floor((distance % 60000) / 1000);
+
+        $('days').textContent = d;
+        $('hours').textContent = h;
+        $('minutes').textContent = m;
+        $('seconds').textContent = s;
+      }
+
+      tick(); // primer render
+      setInterval(tick, 1000);
+    } catch (e) {
+      setStatus('Error: ' + (e && e.message ? e.message : String(e)), true);
+      console.error(e);
+    }
+  })();
+  </script>
+</body>
+</html>
